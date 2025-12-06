@@ -10,6 +10,8 @@ import { getConfig } from '@/lib/config';
 import { GlobalErrorIndicator } from '../components/GlobalErrorIndicator';
 import { SiteProvider } from '../components/SiteProvider';
 import { ThemeProvider } from '../components/ThemeProvider';
+import { WatchRoomProvider } from '../components/WatchRoomProvider';
+import ChatFloatingWindow from '../components/watch-room/ChatFloatingWindow';
 
 const inter = Inter({ subsets: ['latin'] });
 export const dynamic = 'force-dynamic';
@@ -120,8 +122,11 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <SiteProvider siteName={siteName} announcement={announcement}>
-            {children}
-            <GlobalErrorIndicator />
+            <WatchRoomProvider>
+              {children}
+              <GlobalErrorIndicator />
+              <ChatFloatingWindow />
+            </WatchRoomProvider>
           </SiteProvider>
         </ThemeProvider>
       </body>
